@@ -1,2 +1,8 @@
 # Livros-ja
 API REST para cadastro e vendas de livros
+
+
+15/09/2025:
+- AINDA ESTÁ EM FASE DE DESENVOLVIMENTO
+- NO MOMENTO, SÓ RODA DE FORMA LOCAL COM A PORTA 8080
+
