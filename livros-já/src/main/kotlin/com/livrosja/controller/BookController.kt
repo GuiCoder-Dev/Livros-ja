@@ -29,38 +29,44 @@ class BookController(
     val customerService: CustomersService
 
 ) {
-    @PostMapping
+    @PostMapping // cria livros
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody @Valid request: PostBookRequest){
         val customer = customerService.getById(request.customerId)
         bookService.create(request.toBookModel(customer))
     }
 
-    @GetMapping
+    @GetMapping // retorna todos os livros já criados
     fun findAll(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> {
         return bookService.findAll(pageable).map {it.toBookResponse()}
     }
 
-    @GetMapping("/actives")
+    @GetMapping("/actives") // retorna somente os livros ativos
     fun findActives(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> {
         return bookService.findActives(pageable).map {it.toBookResponse()}
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // retorna um livro pelo id
     fun findById (@PathVariable id: Int): BookResponse{
         return bookService.findById(id).toBookResponse()
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteStatusById (@PathVariable id: Int){
-        return bookService.deleteStatusById(id)
+    @GetMapping("/bookspercostumers/{id}") // retornar todos os livros de um usuário pelo seu id (do usuário)
+    fun findBooksPerCostumer(@PathVariable id: Int, @PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> {
+           return bookService.findCustomerId(id, pageable = pageable).map {it.toBookResponse()}
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // atualiza um livro pelo id
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun update (@PathVariable id: Int, @RequestBody book: PutBookRequest){
         val bookSaved = bookService.findById(id)
         bookService.update(book.toBookModel(previousValue = bookSaved))
     }
+
+    @DeleteMapping("/{id}") // deleta um livro pelo id
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteStatusById (@PathVariable id: Int){
+        return bookService.deleteStatusById(id)
+    }
+
 }

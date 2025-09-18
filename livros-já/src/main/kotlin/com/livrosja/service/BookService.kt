@@ -6,13 +6,15 @@ import com.livrosja.exception.NotFoundException
 import com.livrosja.model.BookModel
 import com.livrosja.model.CustomerModel
 import com.livrosja.repository.BookRepository
+import com.livrosja.repository.CustomerRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
 class BookService(
-    val bookRepository: BookRepository
+    val bookRepository: BookRepository,
+    val customerRepository: CustomerRepository,
 ) {
 
     //POST
@@ -35,16 +37,27 @@ class BookService(
         return bookRepository.findById(id).orElseThrow{NotFoundException(Errors.LJ1001.message.format(id),Errors.LJ1001.code) }
     }
 
-    //DELETE(ID)
-    fun deleteStatusById(id: Int){
-        val book = findById(id)
-        book.status = BookStatus.CANCELADO
-        update(book)
+    //GET(ID)
+    fun findCustomerId(customerId: Int, pageable: Pageable): Page<BookModel>{
+        val booksForCustomer = bookRepository.findByCustomerId(customerId, pageable = pageable)
+
+        if(!customerRepository.existsById(customerId)) {
+            throw NotFoundException(Errors.LJ1101.message.format(customerId), Errors.LJ1101.code)
+        }
+
+        return booksForCustomer
     }
 
     //PUT
     fun update(book: BookModel) {
         bookRepository.save(book)
+    }
+
+    //DELETE(ID)
+    fun deleteStatusById(id: Int){
+        val book = findById(id)
+        book.status = BookStatus.CANCELADO
+        update(book)
     }
 
     //DELETE (ATRAVÉS DO CUSTOMER)

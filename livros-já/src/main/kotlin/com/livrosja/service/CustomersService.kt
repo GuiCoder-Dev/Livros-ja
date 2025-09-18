@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service
 class CustomersService(
     private val customerRepository: CustomerRepository,
     val bookService: BookService,
-    private val bookRepository: BookRepository
 ) {
 
     //GET

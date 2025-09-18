@@ -5,7 +5,6 @@ import com.livrosja.controller.request.PutCustomerRequest
 import com.livrosja.controller.response.CostumerResponse
 import com.livrosja.extesion.toCustomerModel
 import com.livrosja.extesion.toCustomerResponse
-import com.livrosja.repository.CustomerRepository
 import com.livrosja.service.CustomersService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
@@ -30,35 +29,35 @@ import org.springframework.web.bind.annotation.RestController
 class CustomerController(
     val customersService: CustomersService,
 ) {
-    @PostMapping
+    @PostMapping // Cria um usuário
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody @Valid customer: PostCustomerRequest) {
         return customersService.create(customer.toCustomerModel())
     }
 
-    @GetMapping
+    @GetMapping // retorna todos os usuários ou retorna um/vários pelas suas letras
     fun getAll(@RequestParam name: String?, @PageableDefault(page = 0, size = 10) pageable: Pageable): Page<CostumerResponse> {
        return customersService.getAll(name, pageable).map{ it.toCustomerResponse() }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // retorna um usuário pelo seu id
     fun getById(@PathVariable id: Int): CostumerResponse{
         return customersService.getById(id).toCustomerResponse()
     }
 
-    @GetMapping("/actives")
+    @GetMapping("/actives") // retorna somente os usuários ativos
     fun findActives(): List<CostumerResponse>{
         return customersService.findActives().map{ it.toCustomerResponse() }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // atualiza um usuário pelo seu id
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun update(@PathVariable id: Int, @RequestBody customer: PutCustomerRequest){
         val customerSaved = customersService.getById(id)
         return customersService.update(customer.toCustomerModel(customerSaved))
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // deleta um usuário pelo seu id
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Int){
         return customersService.delete(id)

@@ -7,6 +7,7 @@ import com.livrosja.controller.request.PutBookRequest
 import com.livrosja.controller.request.PutCustomerRequest
 import com.livrosja.controller.response.BookResponse
 import com.livrosja.controller.response.CostumerResponse
+import com.livrosja.controller.response.PurchaseResponse
 import com.livrosja.enums.BookStatus
 import com.livrosja.enums.CustomerStatus
 import com.livrosja.model.BookModel
@@ -63,7 +64,7 @@ fun CustomerModel.toCustomerResponse(): CostumerResponse{
     )
 }
 
-fun BookModel.toBookResponse(): BookResponse{
+fun BookModel.toBookResponse(): BookResponse {
     return BookResponse(
         id = this.id,
         name = this.name,
@@ -71,7 +72,14 @@ fun BookModel.toBookResponse(): BookResponse{
         customer = this.customer,
         status = this.status,
     )
-
 }
+
+fun PurchaseModel.toPurchaseResponse(): PurchaseResponse {
+    return PurchaseResponse(
+        books = this.books
+    )
+}
+
+
 
 

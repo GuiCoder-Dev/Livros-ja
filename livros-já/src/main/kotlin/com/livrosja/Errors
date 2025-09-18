@@ -2,7 +2,9 @@
 2 - Posso mudar outro usuário
 3 - O Put ativa um livro mesmo cancelado/deletado e também ativa um usuário inativo
 4 - Consigo comprar meu próprio livro
-5 - O mesmo usuário consegue comprar várias vezes o mesmo livro
-6 - Horário de compra errado
-7 - E-mail não está 100% validado, já que "@gmail.co" passa na validação
-8 - O Usuário consegue comprar um livro mesmo deletado, cancelado ou vendido
+5 - Horário de compra errado
+6 - E-mail não está 100% validado, já que "@gmail.co" passa na validação
+
+----
+
+dia 18/09 - tratar erro do retorno de livros do usuário //// e //// fazer outro commit/push no GitHub
