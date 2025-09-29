@@ -16,4 +16,6 @@ interface CustomerRepository: JpaRepository<CustomerModel, Int> {
     override fun findAll(pageable: Pageable): Page<CustomerModel>
 
     fun existsByEmail(email: String): Boolean
+
+    fun findByEmail(email: String): CustomerModel?
 }

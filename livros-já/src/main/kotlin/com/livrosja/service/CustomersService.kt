@@ -2,20 +2,31 @@ package com.livrosja.service
 
 import com.livrosja.enums.CustomerStatus
 import com.livrosja.enums.Errors
+import com.livrosja.enums.Roles
 import com.livrosja.exception.NotFoundException
-import com.livrosja.model.BookModel
 import com.livrosja.model.CustomerModel
-import com.livrosja.repository.BookRepository
 import com.livrosja.repository.CustomerRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class CustomersService(
     private val customerRepository: CustomerRepository,
-    val bookService: BookService,
+    private val bookService: BookService,
+    private val passwordEncoder: PasswordEncoder
 ) {
+
+    //POST
+    fun create(customer: CustomerModel) {
+        val customerWithRole = customer.copy(
+            roles = setOf(Roles.CUSTOMER),
+            password = passwordEncoder.encode(customer.password)
+        )
+
+        customerRepository.save(customerWithRole)
+    }
 
     //GET
     fun getAll(name: String?, pageable: Pageable): Page<CustomerModel> {
@@ -23,11 +34,6 @@ class CustomersService(
             return customerRepository.findByNameContaining(pageable = pageable, name = name)
         }
         return customerRepository.findAll(pageable = pageable)
-    }
-
-    //POST
-    fun create(customer: CustomerModel) {
-        customerRepository.save(customer)
     }
 
     //GET{ID}

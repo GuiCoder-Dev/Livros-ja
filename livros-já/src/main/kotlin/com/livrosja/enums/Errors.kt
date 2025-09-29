@@ -16,4 +16,7 @@ enum class Errors(
 
     // 1301 a 1400 (Purchase Errors)
     LJ1301("LJ-0005", "Cannot buy a sold book"),
+
+    // 1401 a 1500 (Login Errors)
+    LJ1401("LJ-0006", "Failed authentication"),
 }

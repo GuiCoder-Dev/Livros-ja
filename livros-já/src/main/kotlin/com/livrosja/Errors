@@ -1,5 +1,5 @@
 1 - O Put não tem validação
-2 - Posso mudar outro usuário
+2 - Posso mudar outro usuário // ver coisas de outro usuário
 3 - O Put ativa um livro mesmo cancelado/deletado e também ativa um usuário inativo
 4 - Consigo comprar meu próprio livro
 5 - Horário de compra errado
@@ -7,4 +7,3 @@
 
 ----
 
-dia 18/09 - tratar erro do retorno de livros do usuário //// e //// fazer outro commit/push no GitHub

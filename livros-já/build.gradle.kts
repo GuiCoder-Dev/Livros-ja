@@ -33,10 +33,19 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+	//JWT
+	implementation("io.jsonwebtoken:jjwt:0.13.0") // JWT
+
+	//Spring Security
+	implementation ("org.springframework.boot:spring-boot-starter-security")
+
+	//Spring Validation
 	implementation("org.springframework.boot:spring-boot-starter-validation") // Validation
 
+	//Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5") // Swagger
 
+	//MySQL and Flyway
 	implementation("org.flywaydb:flyway-mysql:11.1.0") // MYSQL / FLYWAY
 	implementation("org.flywaydb:flyway-core:11.1.0") // FLYWAY
 	runtimeOnly("com.mysql:mysql-connector-j") // MYSQL

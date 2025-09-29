@@ -5,6 +5,7 @@ import com.livrosja.controller.request.PutCustomerRequest
 import com.livrosja.controller.response.CostumerResponse
 import com.livrosja.extesion.toCustomerModel
 import com.livrosja.extesion.toCustomerResponse
+import com.livrosja.repository.CustomerRepository
 import com.livrosja.service.CustomersService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("customers")
 class CustomerController(
-    val customersService: CustomersService,
+    private val customersService: CustomersService,
 ) {
     @PostMapping // Cria um usuário
     @ResponseStatus(HttpStatus.CREATED)

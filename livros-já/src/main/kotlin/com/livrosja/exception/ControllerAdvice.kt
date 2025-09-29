@@ -57,4 +57,18 @@ class ControllerAdvice {
         return ResponseEntity(error, HttpStatus.BAD_REQUEST)
     }
 
+    @ExceptionHandler(AuthenticationException::class)
+    fun handleBadBuyException(ex: AuthenticationException, request: WebRequest): ResponseEntity<ErrorResponse>{
+        val error = ErrorResponse(
+            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            ex.message,
+            ex.errorCode,
+            null
+        )
+        return ResponseEntity(error, HttpStatus.UNPROCESSABLE_ENTITY)
+    }
+
+
+
+
 }
