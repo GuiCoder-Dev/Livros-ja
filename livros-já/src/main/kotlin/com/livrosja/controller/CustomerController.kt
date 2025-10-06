@@ -5,7 +5,7 @@ import com.livrosja.controller.request.PutCustomerRequest
 import com.livrosja.controller.response.CostumerResponse
 import com.livrosja.extesion.toCustomerModel
 import com.livrosja.extesion.toCustomerResponse
-import com.livrosja.repository.CustomerRepository
+import com.livrosja.security.annotationPermition.UserResourceAccessOwn
 import com.livrosja.service.CustomersService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 
-// fazer paginação no costumer na próx aula
+
 @RestController
 @RequestMapping("customers")
 class CustomerController(
@@ -42,6 +42,7 @@ class CustomerController(
     }
 
     @GetMapping("/{id}") // retorna um usuário pelo seu id
+    @UserResourceAccessOwn
     fun getById(@PathVariable id: Int): CostumerResponse{
         return customersService.getById(id).toCustomerResponse()
     }
@@ -52,6 +53,7 @@ class CustomerController(
     }
 
     @PutMapping("/{id}") // atualiza um usuário pelo seu id
+    @UserResourceAccessOwn
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun update(@PathVariable id: Int, @RequestBody customer: PutCustomerRequest){
         val customerSaved = customersService.getById(id)
@@ -59,6 +61,7 @@ class CustomerController(
     }
 
     @DeleteMapping("/{id}") // deleta um usuário pelo seu id
+    @UserResourceAccessOwn
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Int){
         return customersService.delete(id)

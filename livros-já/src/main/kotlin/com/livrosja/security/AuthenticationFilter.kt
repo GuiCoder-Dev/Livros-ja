@@ -15,7 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 class AuthenticationFilter(
     authenticationManager: AuthenticationManager,
-    private val customerRepository: CustomerRepository
+    private val customerRepository: CustomerRepository,
+    private val jwtUtil: JwtUtil
 ): UsernamePasswordAuthenticationFilter(authenticationManager) {
 
     // O SPRING CRIA UM /LOGIN (ENDPOINT)
@@ -34,12 +35,10 @@ class AuthenticationFilter(
     }
 
     override fun successfulAuthentication(request: HttpServletRequest, response: HttpServletResponse,  chain: FilterChain, authResult: Authentication) {
-       val id = (authResult.principal as UserSecurityDetails).id
+        val id = (authResult.principal as UserSecurityDetails).id
 
-
-
-
-        response.addHeader("Authorization", "1234567")
+        val token = jwtUtil.generateToken(id)
+        response.addHeader("Authorization", "Bearer $token")
     }
 
 }

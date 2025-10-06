@@ -5,6 +5,7 @@ import com.livrosja.controller.request.PutBookRequest
 import com.livrosja.controller.response.BookResponse
 import com.livrosja.extesion.toBookModel
 import com.livrosja.extesion.toBookResponse
+import com.livrosja.security.annotationPermition.BookResourceAccess
 import com.livrosja.service.BookService
 import com.livrosja.service.CustomersService
 import jakarta.validation.Valid
@@ -47,6 +48,7 @@ class BookController(
     }
 
     @GetMapping("/{id}") // retorna um livro pelo id
+    @BookResourceAccess
     fun findById (@PathVariable id: Int): BookResponse{
         return bookService.findById(id).toBookResponse()
     }
