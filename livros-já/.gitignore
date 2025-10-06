@@ -40,4 +40,6 @@ out/
 .kotlin
 
 ### MINHAS IGNORES ###
-application.yml
+src/main/resources/application.yml
+
+build.gradle.kts
