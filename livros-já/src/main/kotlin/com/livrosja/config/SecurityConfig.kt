@@ -13,7 +13,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -31,9 +30,11 @@ class SecurityConfig(
     private val customerRepository: CustomerRepository,
 ) {
 
+    // Customer: ok, Books:
+
     private val publicPosts = arrayOf("/customers")
 
-    private val admin_matchers = arrayOf("/admin/**")
+    private val adminMatchers = arrayOf("/admin/**", "/customers", "/customers/actives", "/books/all")
 
 
 
@@ -65,7 +66,7 @@ class SecurityConfig(
             .authorizeHttpRequests{
                 auth -> auth
                 .requestMatchers(HttpMethod.POST, *publicPosts).permitAll()
-                .requestMatchers(*admin_matchers).hasAuthority(Roles.ADMIN.description)
+                .requestMatchers(*adminMatchers).hasAuthority(Roles.ADMIN.description)
                 .anyRequest().authenticated()
             }
 

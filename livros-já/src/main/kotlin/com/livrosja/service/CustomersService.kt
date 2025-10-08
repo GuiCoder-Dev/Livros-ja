@@ -18,7 +18,7 @@ class CustomersService(
     private val passwordEncoder: PasswordEncoder
 ) {
 
-    //POST //
+    //POST
     fun create(customer: CustomerModel) {
         val customerWithRole = customer.copy(
             roles = setOf(Roles.CUSTOMER),

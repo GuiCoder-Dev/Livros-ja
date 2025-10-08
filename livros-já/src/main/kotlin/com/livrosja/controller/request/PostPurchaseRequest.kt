@@ -6,14 +6,14 @@ import org.jetbrains.annotations.NotNull
 
 data class PostPurchaseRequest(
 
-    @field: NotNull
-    @field: Positive
-    @JsonAlias("customer_id")
-    val customerId: Int,
 
     @field: NotNull
     @JsonAlias("book_ids")
     val bookIds: Set<Int>,
 )
 
+// @field: NotNull
+//    @field: Positive
+//    @JsonAlias("customer_id")
+//    val customerId: Int,
 

@@ -1,10 +1,12 @@
 1 - O Put não tem validação
-2 - Posso mudar outro usuário // ver coisas de outro usuário
-3 - O Put ativa um livro mesmo cancelado/deletado e também ativa um usuário inativo
-4 - Consigo comprar meu próprio livro
-5 - Horário de compra errado
-6 - E-mail não está 100% validado, já que "@gmail.co" passa na validação
-7 - Consigo criar um livro para outro usuário
+2 - O Put ativa um livro mesmo cancelado/deletado e também ativa um usuário inativo
+3 - Consigo comprar meu próprio livro
+4 - Horário de compra errado
+5 - E-mail não está 100% validado, já que "@gmail.co" passa na validação
+6 - IMPORTANTE (QUANDO ACABAR APLICAÇÃO (DAR GITIGNORE NO APPLICATION.YML)
+
 
 ----
+
+
 

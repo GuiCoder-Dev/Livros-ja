@@ -5,13 +5,13 @@ import com.livrosja.controller.request.PutCustomerRequest
 import com.livrosja.controller.response.CostumerResponse
 import com.livrosja.extesion.toCustomerModel
 import com.livrosja.extesion.toCustomerResponse
-import com.livrosja.security.annotationPermition.UserResourceAccessOwn
 import com.livrosja.service.CustomersService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -36,13 +36,14 @@ class CustomerController(
         return customersService.create(customer.toCustomerModel())
     }
 
+    // somente ADM
     @GetMapping // retorna todos os usuários ou retorna um/vários pelas suas letras
     fun getAll(@RequestParam name: String?, @PageableDefault(page = 0, size = 10) pageable: Pageable): Page<CostumerResponse> {
        return customersService.getAll(name, pageable).map{ it.toCustomerResponse() }
     }
 
     @GetMapping("/{id}") // retorna um usuário pelo seu id
-    @UserResourceAccessOwn
+    @PreAuthorize("hasRole('ROLE_ADMIN') || #id == authentication.principal.id")
     fun getById(@PathVariable id: Int): CostumerResponse{
         return customersService.getById(id).toCustomerResponse()
     }
@@ -53,7 +54,7 @@ class CustomerController(
     }
 
     @PutMapping("/{id}") // atualiza um usuário pelo seu id
-    @UserResourceAccessOwn
+    @PreAuthorize("hasRole('ROLE_ADMIN') || #id == authentication.principal.id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun update(@PathVariable id: Int, @RequestBody customer: PutCustomerRequest){
         val customerSaved = customersService.getById(id)
@@ -61,7 +62,7 @@ class CustomerController(
     }
 
     @DeleteMapping("/{id}") // deleta um usuário pelo seu id
-    @UserResourceAccessOwn
+    @PreAuthorize("hasRole('ROLE_ADMIN') || #id == authentication.principal.id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Int){
         return customersService.delete(id)

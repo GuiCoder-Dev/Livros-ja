@@ -4,7 +4,7 @@ import com.livrosja.model.BookModel
 import com.livrosja.model.CustomerModel
 
 data class PurchaseResponse(
-    var books: MutableList<BookModel>,
+    var books: MutableList<BookResponse2>,
 )
 
 
