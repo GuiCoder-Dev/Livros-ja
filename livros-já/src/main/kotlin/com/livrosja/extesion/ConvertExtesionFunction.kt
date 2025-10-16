@@ -15,7 +15,7 @@ import com.livrosja.enums.CustomerStatus
 import com.livrosja.model.BookModel
 import com.livrosja.model.CustomerModel
 import com.livrosja.model.PurchaseModel
-import kotlin.collections.MutableList
+
 
 
 // Resquest To Model
@@ -105,6 +105,17 @@ fun PurchaseModel.toPurchaseResponse(): PurchaseResponse {
     )
 }
 
+//fun <T> Page<T>.toPageCustomResponse(): PageCustomResponse<T> {
+//    return PageCustomResponse(
+//        this.content,
+//        this.pageable.pageNumber,
+//        this.totalElements,
+//        this.totalPages,
+//        this.isLast,
+//        this.isFirst,
+//        this.size
+//    )
+//}
 
 
 

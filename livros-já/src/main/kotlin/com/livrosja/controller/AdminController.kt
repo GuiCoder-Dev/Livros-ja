@@ -12,7 +12,7 @@ class AdminController(
 
 ) {
 
-    @GetMapping("/report") // retorna todos os usuários ou retorna um/vários pelas suas letras
+    @GetMapping("/reports") // retorna todos os usuários ou retorna um/vários pelas suas letras
     fun report(): String{
        return "Isso é um report, apenas admins podem visualizar isso"
     }

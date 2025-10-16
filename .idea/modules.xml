@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Projeto Kotlin + Springle.iml" filepath="$PROJECT_DIR$/.idea/Projeto Kotlin + Springle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/livros-ja.test.iml" filepath="$PROJECT_DIR$/.idea/modules/livros-ja.test.iml" />
     </modules>
   </component>
 </project>

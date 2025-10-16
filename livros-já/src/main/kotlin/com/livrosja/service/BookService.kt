@@ -1,7 +1,10 @@
 package com.livrosja.service
 
+
 import com.livrosja.enums.BookStatus
+import com.livrosja.enums.CustomerStatus
 import com.livrosja.enums.Errors
+import com.livrosja.exception.BadCreateException
 import com.livrosja.exception.NotFoundException
 import com.livrosja.model.BookModel
 import com.livrosja.model.CustomerModel
@@ -19,7 +22,14 @@ class BookService(
 
     //POST
     fun create(book: BookModel) {
-        bookRepository.save(book)
+
+        val customer = book.customer!!.status
+
+        if(customer == CustomerStatus.ATIVO) {
+            bookRepository.save(book)
+        } else {
+            throw BadCreateException(Errors.LJ1003.message, Errors.LJ1003.code)
+        }
     }
 
     //GET
@@ -28,7 +38,7 @@ class BookService(
     }
 
     //GET(BookStatus)
-    fun findActives(pageable: Pageable): Page<BookModel>{
+    fun findActives(pageable: Pageable): Page<BookModel> {
         return bookRepository.findByStatus(BookStatus.ATIVO, pageable)
     }
 

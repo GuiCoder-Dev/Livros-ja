@@ -49,8 +49,8 @@ class CustomerController(
     }
 
     @GetMapping("/actives") // retorna somente os usuários ativos
-    fun findActives(): List<CostumerResponse>{
-        return customersService.findActives().map{ it.toCustomerResponse() }
+    fun findActives(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<CostumerResponse>{
+        return customersService.findActives(pageable).map{ it.toCustomerResponse() }
     }
 
     @PutMapping("/{id}") // atualiza um usuário pelo seu id

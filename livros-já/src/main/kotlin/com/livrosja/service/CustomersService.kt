@@ -1,5 +1,6 @@
 package com.livrosja.service
 
+
 import com.livrosja.enums.CustomerStatus
 import com.livrosja.enums.Errors
 import com.livrosja.enums.Roles
@@ -29,11 +30,11 @@ class CustomersService(
     }
 
     //GET
-    fun getAll(name: String?, pageable: Pageable): Page<CustomerModel> {
+    fun getAll(name: String?, pageable: Pageable?): Page<CustomerModel> {
         name?.let{
-            return customerRepository.findByNameContaining(pageable = pageable, name = name)
+            return customerRepository.findByNameContaining(pageable = pageable!!, name = name)
         }
-        return customerRepository.findAll(pageable = pageable)
+        return customerRepository.findAll(pageable = pageable!!)
     }
 
     //GET{ID}
@@ -59,8 +60,8 @@ class CustomersService(
     }
 
     //GET (ATIVOS)
-    fun findActives(): List<CustomerModel>{
-        return customerRepository.findByStatus(status = CustomerStatus.ATIVO)
+    fun findActives(pageable: Pageable): Page<CustomerModel>{
+        return customerRepository.findByStatus(status = CustomerStatus.ATIVO, pageable = pageable)
     }
 
     fun emailAvailable(email: String): Boolean {

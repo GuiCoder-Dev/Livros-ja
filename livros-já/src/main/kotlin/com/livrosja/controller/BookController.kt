@@ -2,10 +2,8 @@ package com.livrosja.controller
 
 import com.livrosja.controller.request.PostBookRequest
 import com.livrosja.controller.request.PutBookRequest
-import com.livrosja.controller.response.BookResponse
 import com.livrosja.controller.response.BookResponse2
 import com.livrosja.extesion.toBookModel
-import com.livrosja.extesion.toBookResponse
 import com.livrosja.extesion.toBookResponse2
 import com.livrosja.security.UserSecurityDetails
 import com.livrosja.service.BookService

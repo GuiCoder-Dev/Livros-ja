@@ -13,6 +13,7 @@ import org.springframework.web.context.request.WebRequest
 @RestControllerAdvice
 class ControllerAdvice {
 
+    // id não encontrado (passado em um lugar)
     @ExceptionHandler(NotFoundException::class)
     fun handleNotFoundException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse>{
         val error = ErrorResponse(
@@ -35,6 +36,7 @@ class ControllerAdvice {
         return ResponseEntity(error, HttpStatus.BAD_REQUEST)
     }
 
+    // verifica campo e-mail e password (não passado em um lugar)
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValueException(ex: MethodArgumentNotValidException, request: WebRequest): ResponseEntity<ErrorResponse>{
         val error = ErrorResponse(
@@ -46,6 +48,7 @@ class ControllerAdvice {
         return ResponseEntity(error, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 
+    // compra não efetuada (passado em um lugar)
     @ExceptionHandler(BadBuyException::class)
     fun handleBadBuyException(ex: BadBuyException, request: WebRequest): ResponseEntity<ErrorResponse>{
         val error = ErrorResponse(
@@ -57,6 +60,7 @@ class ControllerAdvice {
         return ResponseEntity(error, HttpStatus.BAD_REQUEST)
     }
 
+    // genérico - autenticação falhou (passado em um lugar)
     @ExceptionHandler(AuthenticationException::class)
     fun handleBadBuyException(ex: AuthenticationException, request: WebRequest): ResponseEntity<ErrorResponse>{
         val error = ErrorResponse(
@@ -68,7 +72,28 @@ class ControllerAdvice {
         return ResponseEntity(error, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 
+    // Criação do livro não efetuada (passado em um lugar)
+    @ExceptionHandler(BadCreateException::class)
+    fun handleBadCreateException(ex: AuthenticationException, request: WebRequest): ResponseEntity<ErrorResponse>{
+        val error = ErrorResponse(
+            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            ex.message,
+            ex.errorCode,
+            null
+        )
+        return ResponseEntity(error, HttpStatus.UNPROCESSABLE_ENTITY)
+    }
 
 
+//    @ExceptionHandler(AccessDeniedException::class)
+//    fun handleAccessDeniedException(ex: AccessDeniedException, request: WebRequest): ResponseEntity<ErrorResponse>{
+//        val error = ErrorResponse(
+//            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+//            Errors.LJ1403.message,
+//            Errors.LJ1403.message,
+//            null
+//        )
+//        return ResponseEntity(error, HttpStatus.UNPROCESSABLE_ENTITY)
+//    }
 
 }

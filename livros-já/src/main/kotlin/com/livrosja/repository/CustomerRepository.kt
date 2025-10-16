@@ -1,5 +1,6 @@
 package com.livrosja.repository
 
+
 import com.livrosja.enums.CustomerStatus
 import com.livrosja.model.CustomerModel
 import org.springframework.data.domain.Page
@@ -11,7 +12,7 @@ interface CustomerRepository: JpaRepository<CustomerModel, Int> {
 
     fun findByNameContaining(name: String?, pageable: Pageable): Page<CustomerModel>
 
-    fun findByStatus(status: CustomerStatus): List<CustomerModel>
+    fun findByStatus(status: CustomerStatus, pageable: Pageable): Page<CustomerModel>
 
     override fun findAll(pageable: Pageable): Page<CustomerModel>
 

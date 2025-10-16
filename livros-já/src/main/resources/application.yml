@@ -1,8 +1,6 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/livrosja?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
-    username: root
-    password: roots
+  profiles:
+    active: dev
 
   flyway:
     enabled: true
